@@ -30,10 +30,10 @@ function confirmarPresenca() {
     method: "POST",
     headers,
     body: JSON.stringify({
-      nome: nome,
-      fralda: fralda,
+      nome,
+      fralda,
       qtd_acompanhantes: qtd,
-      crianca: crianca
+      crianca
     })
   }).then((res) => {
     if (res.ok) {
