@@ -44,7 +44,10 @@ function confirmarPresenca() {
     })
   })
   .then(res => {
-    console.log("📦 Resposta do Supabase:", res);
+    res.text().then(text => {
+      console.log("📦 Resposta do Supabase:", text);
+    });
+
     if (res.ok) {
       document.getElementById("status").innerText = "🎉 Presença confirmada com sucesso!";
     } else {
