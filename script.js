@@ -23,23 +23,26 @@ if (nome && convidados[nome.toLowerCase()]) {
 
 function confirmarPresenca() {
   const fralda = convidados[nome.toLowerCase()].fralda;
-  const qtd = parseInt(document.getElementById('qtdAcompanhante').value);
+  const qtd = parseInt(document.getElementById('qtdAcompanhante').value) || 0;
   const crianca = document.getElementById('crianca').value;
 
   fetch(`${supabaseUrl}/rest/v1/confirmados`, {
     method: "POST",
     headers,
     body: JSON.stringify({
-      nome,
-      fralda,
+      nome: nome,
+      fralda: fralda,
       qtd_acompanhantes: qtd,
-      crianca
+      crianca: crianca
     })
   }).then((res) => {
     if (res.ok) {
       document.getElementById("status").innerText = "🎉 Presença confirmada com sucesso!";
     } else {
       document.getElementById("status").innerText = "❌ Erro ao confirmar. Tente novamente.";
+      console.error("Erro Supabase:", res.status, res.statusText);
     }
+  }).catch((err) => {
+    console.error("Erro de conexão:", err);
   });
 }
