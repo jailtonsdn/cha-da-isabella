@@ -21,18 +21,31 @@ if (nome && convidados[nome.toLowerCase()]) {
   document.getElementById('mensagem').innerHTML = 'Convidado não identificado.';
 }
 
-function confirmarPresenca() {
+async function confirmarPresenca() {
   const fralda = convidados[nome.toLowerCase()].fralda;
   const qtd = parseInt(document.getElementById('qtdAcompanhante').value) || 0;
   const crianca = document.getElementById('crianca').value;
 
-  console.log("🔍 Enviando para Supabase:", {
-    nome,
-    fralda,
-    qtd_acompanhantes: qtd,
-    crianca
+  const statusEl = document.getElementById("status");
+
+  // 🔎 Verifica se já confirmou
+  const resCheck = await fetch(`${supabaseUrl}/rest/v1/confirmados?nome=eq.${nome}`, {
+    method: "GET",
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`
+    }
   });
 
+  const dados = await resCheck.json();
+
+  if (dados.length > 0) {
+    statusEl.innerText = "⚠️ Você já confirmou sua presença!";
+    statusEl.style.color = "orange";
+    return;
+  }
+
+  // ✅ Se não confirmou, envia normalmente
   fetch(`${supabaseUrl}/rest/v1/confirmados`, {
     method: "POST",
     headers,
@@ -44,17 +57,18 @@ function confirmarPresenca() {
     })
   })
   .then(res => {
-    res.text().then(text => {
-      console.log("📦 Resposta do Supabase:", text);
-    });
-
     if (res.ok) {
-      document.getElementById("status").innerText = "🎉 Presença confirmada com sucesso!";
+      statusEl.innerText = "🎉 Presença confirmada com sucesso!";
+      statusEl.style.color = "green";
     } else {
-      document.getElementById("status").innerText = "❌ Erro ao confirmar. Tente novamente.";
+      statusEl.innerText = "❌ Erro ao confirmar. Tente novamente.";
+      statusEl.style.color = "red";
     }
   })
   .catch(err => {
-    console.error("🚨 Erro ao conectar com Supabase:", err);
+    console.error("Erro:", err);
+    statusEl.innerText = "❌ Erro ao conectar com o servidor.";
+    statusEl.style.color = "red";
   });
 }
+
