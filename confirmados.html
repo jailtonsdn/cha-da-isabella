@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmados - Chá da Isabella</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📋 Confirmados</h1>
+    <div id="listaConfirmados">Carregando...</div>
+  </div>
+
+  <script>
+    const supabaseUrl = "https://oydrtdgfrlwuvjyihoox.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95ZHJ0ZGdmcmx3dXZqeWlob294Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NDU0NjUsImV4cCI6MjA2MDMyMTQ2NX0.XYxH-vBEw9U_g-rZTct27os5E_wv4UExB5fod2FJD3g";
+
+    async function carregarConfirmados() {
+      const res = await fetch(`${supabaseUrl}/rest/v1/confirmados?select=*`, {
+        method: "GET",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`
+        }
+      });
+
+      const dados = await res.json();
+      const container = document.getElementById("listaConfirmados");
+
+      if (dados.length === 0) {
+        container.innerHTML = "<p>Nenhum convidado confirmou ainda.</p>";
+        return;
+      }
+
+      let html = "<ul style='list-style: none; padding: 0;'>";
+      dados.forEach(item => {
+        html += `
+          <li style="margin-bottom: 15px; padding: 15px; background: #fff8f8; border-radius: 8px;">
+            <strong>👤 Nome:</strong> ${item.nome}<br>
+            <strong>🍼 Fralda:</strong> ${item.fralda}<br>
+            <strong>👥 Acompanhantes:</strong> ${item.qtd_acompanhantes}<br>
+            <strong>🧒 Criança:</strong> ${item.crianca}
+          </li>
+        `;
+      });
+      html += "</ul>";
+
+      container.innerHTML = html;
+    }
+
+    carregarConfirmados();
+  </script>
+</body>
+</html>
