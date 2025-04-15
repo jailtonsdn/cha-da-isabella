@@ -9,21 +9,26 @@
   <div class="container">
     <h1>🎀 Chá da Isabella</h1>
     <p id="mensagem"></p>
-    <div id="formulario" style="display: none;">
-      <label for="qtdAcompanhante">Quantos acompanhantes?</label>
-<input type="number" id="qtdAcompanhante" min="0" value="0" />
 
-<label for="crianca">Algum acompanhante é criança?</label>
-<select id="crianca">
-  <option value="não">Não</option>
-  <option value="sim">Sim</option>
-</select>
+    <div id="formulario" style="display: none; margin-top: 20px;">
+      <div style="text-align: left;">
+        <label for="qtdAcompanhante"><strong>Quantos acompanhantes?</strong></label><br>
+        <input type="number" id="qtdAcompanhante" min="0" value="0" style="width: 100%; padding: 5px;" />
+        <br><br>
 
-      <br><br>
+        <label for="crianca"><strong>Algum acompanhante é criança?</strong></label><br>
+        <select id="crianca" style="width: 100%; padding: 5px;">
+          <option value="não">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+      </div>
+
+      <br>
       <button onclick="confirmarPresenca()">✅ Confirmar Presença</button>
-      <p id="status"></p>
+      <p id="status" style="margin-top: 10px; color: green;"></p>
     </div>
   </div>
+
   <script src="convidados.js"></script>
   <script src="script.js"></script>
 </body>
