@@ -1,5 +1,5 @@
 const supabaseUrl = "https://oydrtdgfrlwuvjyihoox.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95ZHJ0ZGdmcmx3dXZqeWlob294Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NDU0NjUsImV4cCI6MjA2MDMyMTQ2NX0.XYxH-vBEw9U_g-rZTct27os5E_wv4UExB5fod2FJD3g";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95ZHJ0ZGdmcmx3dXZqeWlob294Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDc0NTQ2NSwiZXhwIjoyMDYwMzIxNDY1fQ.VZNx0iVM7T1fnb84-PRkU2WUux3eLFgV-RqlO0WMEbk";
 
 const headers = {
   "apikey": supabaseKey,
