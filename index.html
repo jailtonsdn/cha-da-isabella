@@ -10,7 +10,15 @@
     <h1>🎀 Chá da Isabella</h1>
     <p id="mensagem"></p>
     <div id="formulario" style="display: none;">
-      <label><input type="checkbox" id="acompanhante"> Levarei acompanhante</label>
+      <label for="qtdAcompanhante">Quantos acompanhantes?</label>
+<input type="number" id="qtdAcompanhante" min="0" value="0" />
+
+<label for="crianca">Algum acompanhante é criança?</label>
+<select id="crianca">
+  <option value="não">Não</option>
+  <option value="sim">Sim</option>
+</select>
+
       <br><br>
       <button onclick="confirmarPresenca()">✅ Confirmar Presença</button>
       <p id="status"></p>
